@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'v1', 'namespace' => 'API/V1'], function (Router $route) {
 
+    // $route->group(["middleware" => "auth:api"], function (Router $route) {
     $route->group([], function (Router $route) {
 
             $route->group(['prefix' => 'users'], function (Router $route) {

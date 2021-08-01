@@ -41,7 +41,9 @@ class AddFetchedUsersJob implements ShouldQueue
                 "email"=>$user[$this->schema['email']],
                 "firstName"=>$user[$this->schema['firstName']],
                 "lastName"=>$user[$this->schema['lastName']],
-                "avatar"=>$user[$this->schema['avatar']]
+                "avatar"=>$user[$this->schema['avatar']],
+                "created_at"=>now()->toDateTimeString(),
+                "updated_at"=>now()->toDateTimeString(),
             ];
         })->toArray();
 
