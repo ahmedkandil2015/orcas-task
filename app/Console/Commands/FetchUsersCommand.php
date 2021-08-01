@@ -52,15 +52,16 @@ class FetchUsersCommand extends Command
         }
         foreach( $userSources as $userSource){
             try{
-                $request = $client->request('get',$userSource);
+                $request = $client->request('get',$userSource['endpoint']);
                 $response= json_decode($request->getBody(),true);
                 if(count($response)==0){
                     continue;
                 }
                 $identifire = (string)Uuid::uuid4();
                 Cache::add($identifire ,$response,now()->addMinutes(30));
-                Log::info($userSource);
+                Log::info($userSource['endpoint']);
                 Log::info($response);
+                
              }catch(\Exception $exception){
                  dd($exception);
              }

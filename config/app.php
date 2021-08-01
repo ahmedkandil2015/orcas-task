@@ -231,8 +231,25 @@ return [
 
     ],
 
-    'user-sources'=>explode(',', env('USERS_SOURCE',"https://60e1b5fc5a5596001730f1d6.mockapi.io/api/v1/users/users_1,https://60e1b5fc5a5596001730f1d6.mockapi.io/api/v1/users/user_2"))
-    
-       
+    'user-sources'=>[
+        [
+            "endpoint"=>"https://60e1b5fc5a5596001730f1d6.mockapi.io/api/v1/users/users_1",
+            "schema"=>[
+                "email"=>"email",
+                "firstName"=>"firstName",
+                "lastName"=>"lastName",
+                "avatar"=>"avatar"
+            ]
+        ] ,     
+          [
+            "endpoint"=>"https://60e1b5fc5a5596001730f1d6.mockapi.io/api/v1/users/user_2",
+            "schema"=>[
+                "email"=>"email",
+                "firstName"=>"fName",
+                "lastName"=>"lName",
+                "avatar"=>"picture"
+            ]
+        ]
+    ]
 
 ];
