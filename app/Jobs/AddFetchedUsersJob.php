@@ -9,6 +9,8 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
 
 class AddFetchedUsersJob implements ShouldQueue
 {
@@ -33,7 +35,7 @@ class AddFetchedUsersJob implements ShouldQueue
      */
     public function handle()
     {  
-        $users = (collect($this->users))->map(function($user){
+        $data["users"] = (collect($this->users))->map(function($user){
 
             return [
                 "email"=>$user[$this->schema['email']],
@@ -42,8 +44,29 @@ class AddFetchedUsersJob implements ShouldQueue
                 "avatar"=>$user[$this->schema['avatar']]
             ];
         })->toArray();
-        DB::table('users')->insert($users); // Query Builder approach
 
-        //
+        $validator = Validator::make($data, [
+            'users.*.email' => 'required|unique:users,email',
+            'users.*.firstName' => 'required',
+            'users.*.lastName' => 'required',
+            'users.*.avatar' => 'required',
+        ]);
+        $users = $data['users'];
+        if($validator->fails()){
+            foreach($validator->errors()->all() as $error){
+                $explodeError=explode('.',$error);
+                unset($users[$explodeError[1]]);
+            }
+        }
+        if(count($users)==0){
+            Log::info("not insert");
+            return true;
+
+        }
+        DB::table('users')->insert($data["users"]); 
+        Log::info("insert");
+        Log::info("finish");
+
+        
     }
 }
