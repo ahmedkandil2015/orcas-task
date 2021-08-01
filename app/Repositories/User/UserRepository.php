@@ -5,5 +5,5 @@ use App\Repositories\BaseRepository;
 
 interface UserRepository extends BaseRepository
 {
-    public function list ();
+    public function list ($attrabuit=[]);
 }

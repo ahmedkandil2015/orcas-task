@@ -24,7 +24,7 @@ Route::group(['prefix' => 'v1', 'namespace' => 'API/V1'], function (Router $rout
 
             $route->group(['prefix' => 'users'], function (Router $route) {
                     $route->get('list', [UserController::class, 'list']);
-                    $route->put('search', [UserController::class, 'search']);
+                    $route->get('search', [UserController::class, 'search']);
             });
     });
 });

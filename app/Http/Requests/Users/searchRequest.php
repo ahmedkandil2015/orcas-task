@@ -4,7 +4,7 @@ namespace App\Http\Requests\Users;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class searchRequest extends FormRequest
+class SearchRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,9 @@ class searchRequest extends FormRequest
     public function rules()
     {
         return [
-            "filter"=>"nullable",
+            "firstName"=>"nullable",
+            "lastName"=>"nullable",
+            "Email"=>"nullable",
         ];
     }
 }

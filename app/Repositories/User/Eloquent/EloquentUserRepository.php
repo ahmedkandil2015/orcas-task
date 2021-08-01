@@ -6,8 +6,9 @@ use App\Repositories\User\UserRepository;
 
 class EloquentUserRepository extends EloquentBaseRepository implements UserRepository
 {
-    public function list (){
-        return $this->getByAttributes([])->sortByDesc('created_at');
+    public function list ($attrabuit=[]){
+        return $this->getByAttributes($attrabuit)->sortByDesc('created_at');
 
     }
+
 }
