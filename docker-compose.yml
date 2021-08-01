@@ -1,0 +1,30 @@
+version: '3.6'
+
+services:
+ 
+  orcas-task:
+    container_name: orcas-task
+    image: orcas/php-nginx
+    ports:
+        - 8086:80
+    volumes:
+        - ./:/var/www:rw
+        # only live 
+        
+    restart: always
+  queue-redis:
+    image: redis:5.0.8
+    container_name: orcas-queue-redis
+    restart: always 
+  orcas-mysql-db :
+    image: mysql:5.7.22
+    container_name:  orcas-mysql-db
+    environment: 
+      MYSQL_ROOT_PASSWORD: 12341234
+    ports: 
+      - '1590:3306'
+    volumes: 
+      - ../databases/test_db:/var/lib/mysql
+      - ../databases_sqls:/tmp/database
+    command: mysqld --init-file="/tmp/database/test_db_init.sql"
+    restart: always
