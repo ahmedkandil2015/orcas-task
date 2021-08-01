@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Jobs\AddFetchedUsersJob;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Illuminate\Console\Command;
@@ -61,7 +62,7 @@ class FetchUsersCommand extends Command
                 Cache::add($identifire ,$response,now()->addMinutes(30));
                 Log::info($userSource['endpoint']);
                 Log::info($response);
-                
+                AddFetchedUsersJob::dispatch($response,$userSource['schema']);
              }catch(\Exception $exception){
                  dd($exception);
              }
