@@ -32,8 +32,20 @@
         REDIS_PORT=6379
     ```
 
+## database migration 
 
-- run php artisan migrate 
-- change QUEUE_CONNECTION "redis" 
-- you can access project api by use "localhost:8086"
+- run ``` docker exec -it orcas-task bash ``` to access task container 
+    - cd /var/www/
+    - run php artisan migrate 
+
+## note
+to access project api by ```localhost:8086```
+to access database by  
+```
+host:127.0.0.1
+port : 1790
+user : root
+password : 12341234
+```
+
 
