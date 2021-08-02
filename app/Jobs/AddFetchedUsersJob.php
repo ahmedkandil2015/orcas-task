@@ -9,6 +9,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
@@ -42,6 +43,7 @@ class AddFetchedUsersJob implements ShouldQueue
                 "firstName"=>$user[$this->schema['firstName']],
                 "lastName"=>$user[$this->schema['lastName']],
                 "avatar"=>$user[$this->schema['avatar']],
+                "password"=>Hash::make("123456789"),
                 "created_at"=>now()->toDateTimeString(),
                 "updated_at"=>now()->toDateTimeString(),
             ];
