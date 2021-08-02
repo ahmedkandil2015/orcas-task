@@ -36,12 +36,11 @@ RUN mkdir -p /var/www
 RUN mkdir -p /var/run/php
 RUN mkdir -p /var/log/php-fpm
 
-# Contents of entrypoint.sh
-# RUN chown -R $USER:www-data /var/www/storage
-# RUN chown -R $USER:www-data /var/www/bootstrap/cache
-# RUN chmod -R 775 /var/www/storage
-# RUN chmod -R 775 /var/www/bootstrap/cache
 
+RUN printf '0 */8 * * * php /var/www/artisan orcas:fetch-users >> /var/log/cron.log 2>&1\n' >> /root/crontab
+
+RUN touch /var/log/cron.log
+RUN crontab /root/crontab
 
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 EXPOSE 80
