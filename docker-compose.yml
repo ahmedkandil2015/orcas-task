@@ -9,10 +9,9 @@ services:
         - 8086:80
     volumes:
         - ./:/var/www:rw
-        # only live 
         
     restart: always
-  queue-redis:
+  orcas-queue-redis:
     image: redis:5.0.8
     container_name: orcas-queue-redis
     restart: always 
@@ -22,9 +21,9 @@ services:
     environment: 
       MYSQL_ROOT_PASSWORD: 12341234
     ports: 
-      - '1590:3306'
+      - 1790:3306
     volumes: 
-      - ../databases/test_db:/var/lib/mysql
-      - ../databases_sqls:/tmp/database
+      - ./docker-config/databases/test_db:/var/lib/mysql
+      - ./docker-config/databases_sqls:/tmp/database
     command: mysqld --init-file="/tmp/database/test_db_init.sql"
     restart: always

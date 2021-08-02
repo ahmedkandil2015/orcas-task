@@ -11,19 +11,29 @@
 ## how to run 
 
 - composer install 
-- cp .env.example .env
+- cp .env.example .env with replace database block to the below 
+
+    ```
+        DB_CONNECTION=mysql
+        DB_HOST=orcas-mysql-db
+        DB_PORT=3306
+        DB_DATABASE=orcas_task
+        DB_USERNAME=root
+        DB_PASSWORD=12341234
+
+    ```
+
 - run php artisan key:generate
 - run php artisan jwt:secret
-- add DB_HOST "orcas-mysql-db"
-- add DB_USERNAME "root"
-- add DB_PASSWORD "12341234"
-- add DB_DATABASE "orcas-task-db" then migrate db
+- replace redis block to the below 
+    ```
+        REDIS_HOST=orcas-queue-redis
+        REDIS_PASSWORD=null
+        REDIS_PORT=6379
+    ```
+
+
 - run php artisan migrate 
-- add REDIS_HOST "queue-redis" 
 - change QUEUE_CONNECTION "redis" 
 - you can access project api by use "localhost:8086"
 
-## database connection 
-
-- connect to database remotlly by use port 1590 - username root - password 12341234
-- create database "orcas-task-db"
