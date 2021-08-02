@@ -49,3 +49,9 @@ password : 12341234
 ```
 
 
+## api documentation 
+
+- you can check api documentation from the below link 
+```
+https://www.getpostman.com/collections/0612d7db8e978ba2d1e4
+```
