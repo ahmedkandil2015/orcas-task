@@ -1,10 +1,9 @@
 <?php
 namespace App\Http\Requests\Users;
 
+use App\Http\Requests\ApiBaseRequest;
 
-use Illuminate\Foundation\Http\FormRequest;
-
-class SearchRequest extends FormRequest
+class SearchRequest extends ApiBaseRequest
 {
     /**
      * Determine if the user is authorized to make this request.
