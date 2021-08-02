@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\V1\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Users\ListRequest;
+use App\Http\Requests\Users\LoginRequest;
 use App\Http\Requests\Users\searchRequest;
 use App\Repositories\User\UserRepository;
 
@@ -53,4 +54,30 @@ class UserController extends Controller
     }
 
     
+    public function login(LoginRequest $request)
+    {
+        $credentials = ['email'=>$request->email, 'password'=>$request->password];
+        if (!$token = auth()->attempt($credentials)) {
+            return responder()->error("verify_user", "user not found ")->respond(400);
+        }
+ 
+
+        return $this->respondWithToken($token);
+        }
+
+    /**
+     * Get the token array structure.
+     *
+     * @param  string $token
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function respondWithToken($token)
+    {
+        return responder()->success([
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => auth()->factory()->getTTL() * 60
+        ]);
+    }
 }
